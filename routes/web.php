@@ -1,29 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 
+Route::get('/',[PageController::class,'home']);
+Route::get('/about',[PageController::class,'about']);
+Route::get('/user/{id}',[PageController::class,'user']);
+Route::get('/profile',[PageController::class,'profile'])->name('Profile');
 
-Route::get('/', function () {
-    return 'Welcome to Laravel Routing!';
+Route::prefix('admin')->group (function(){
+    Route::get('/dashboard',[PageController::class,'dashboard']);
 });
 
-
-Route::get('/about', function () {
-    return view('about');
-});
-
-
-Route::get('/user/{id}', function ($id) {
-    return "User ID is: " . $id;
-});
-
-Route::get('/profile', function () {
-    return 'This is your profile.';
-})->name('profile');
-
-
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return 'Welcome to Admin Dashboard';
-    });
-});
+Route::get('/checkuser',[PageController::class,'checkuser'])->middleware('block.user');

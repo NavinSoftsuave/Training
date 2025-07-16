@@ -1,16 +1,22 @@
-## Date: 2025-07-15
-## Topic: Laravel Routing (Web & API)
 
-Today I practiced Laravel Routing, including web routes and API routes. This helped me understand how to handle different kinds of HTTP requests and organize route files.
+##  Date: 2025-07-16 - Day 2 (Part 1)
+##  Topics: Controllers & Middleware
+
 
 ## Tasks Completed:
 
-- Created basic web routes in `routes/web.php`
-- Used route parameters and named routes
-- Created a web route that returns a view
-- Grouped routes with `prefix()`
-- Added sample API routes in `routes/api.php`
-- Grouped API routes for versioning or admin prefixes
+- Created controller using `php artisan make:controller PageController`
+- Moved routing logic from `web.php` to controller
+- Created custom middleware using `php artisan make:middleware BlockUserMiddleware`
+- Applied middleware to routes
+- Tested conditional blocking using request parameters
 
+## Testing URLs:
 
+http://localhost:8000/ → Controller response
 
+http://localhost:8000/user/5 → Controller with parameter
+
+http://localhost:8000/check-user?block=yes → Blocked by middleware
+
+http://localhost:8000/check-user?block=no → Allowed
