@@ -1,22 +1,24 @@
 
-##  Date: 2025-07-16 - Day 2 (Part 1)
-##  Topics: Controllers & Middleware
+##  Date: 2025-07-16  Day 2 (Part 2)
+ 
+## Topics Covered:
+
+- Middleware Grouping
+- Form Request Validation in Controller
+- Handling 405 and 419 Errors
+- CSRF Token Exception for API Testing
 
 
-## Tasks Completed:
+##  Tasks Completed
 
-- Created controller using `php artisan make:controller PageController`
-- Moved routing logic from `web.php` to controller
-- Created custom middleware using `php artisan make:middleware BlockUserMiddleware`
-- Applied middleware to routes
-- Tested conditional blocking using request parameters
+###  Middleware Grouping
+Grouped multiple routes under a middleware to avoid repetition.
 
-## Testing URLs:
+### Issue 2: 419 Page Expired
+Even after using the correct POST method, Laravel rejected the request and returned a 419 Page Expired error.
 
-http://localhost:8000/ → Controller response
+#### Why it happened:
+By default, Laravel protects all routes in web.php using CSRF (Cross-Site Request Forgery) tokens. Since Postman does not send this token, Laravel treated the request as suspicious and blocked it.
 
-http://localhost:8000/user/5 → Controller with parameter
-
-http://localhost:8000/check-user?block=yes → Blocked by middleware
-
-http://localhost:8000/check-user?block=no → Allowed
+#### How I fixed it:
+I opened the VerifyCsrfToken.php middleware file and added /submit-form to the $except array. This told Laravel to skip CSRF token verification for that specific route, which allowed me to test the form successfully using Postman.

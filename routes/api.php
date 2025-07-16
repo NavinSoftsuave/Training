@@ -20,3 +20,8 @@ Route::prefix('admin')->group(function () {
         return response()->json(['message' => 'Admin API Dashboard']);
     });
 });
+
+use App\Http\Controllers\FormController;
+
+Route::post('/submit-form', [FormController::class, 'submit']);
+

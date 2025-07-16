@@ -30,9 +30,7 @@ class PageController extends Controller
     {
         return "Welcome to dash board";
     }
-    public function checkuser()
-    {
-        return "You are allowed";
+    
     }
 
-}
+

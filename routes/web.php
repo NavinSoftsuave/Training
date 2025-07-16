@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FormController;
 
 Route::get('/',[PageController::class,'home']);
 Route::get('/about',[PageController::class,'about']);
@@ -12,4 +14,10 @@ Route::prefix('admin')->group (function(){
     Route::get('/dashboard',[PageController::class,'dashboard']);
 });
 
-Route::get('/checkuser',[PageController::class,'checkuser'])->middleware('block.user');
+Route::middleware(['block.user'])->prefix('admin')->group(function() {
+
+    Route::get('/user1',[AdminController::class,'user1']);
+    Route::get('/user2',[AdminController::class,'user2']);
+});
+
+//Route::post('/submit-form', [FormController::class, 'submit']);
