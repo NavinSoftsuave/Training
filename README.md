@@ -1,24 +1,41 @@
+# Day 3 - Part 1  
+**Topic**: Model, Migration, and API Resource Controller  
 
-##  Date: 2025-07-16  Day 2 (Part 2)
- 
-## Topics Covered:
+---
 
-- Middleware Grouping
-- Form Request Validation in Controller
-- Handling 405 and 419 Errors
-- CSRF Token Exception for API Testing
+### What I Did:
+- Created a new model called `Post` using:
+  php artisan make:model Post -mc
+  This created the model, migration file, and controller.
 
+- In the migration file, I added two fields: `title` (string) and `content` (text).
 
-##  Tasks Completed
+- Ran php artisan migrate to create the `posts` table.
 
-###  Middleware Grouping
-Grouped multiple routes under a middleware to avoid repetition.
+- In the PostController, I defined basic resource methods:
+  - index() – Get all posts
+  - store() – Create a new post (with validation)
+  - show() – Show a single post
+  - update() – Update an existing post
+  - destroy() – Delete a post
 
-### Issue 2: 419 Page Expired
-Even after using the correct POST method, Laravel rejected the request and returned a 419 Page Expired error.
+- Used Route Model Binding for cleaner controller methods.
 
-#### Why it happened:
-By default, Laravel protects all routes in web.php using CSRF (Cross-Site Request Forgery) tokens. Since Postman does not send this token, Laravel treated the request as suspicious and blocked it.
+- Defined the route in routes/api.php using:
+  Route::apiResource('posts', PostController::class);
 
-#### How I fixed it:
-I opened the VerifyCsrfToken.php middleware file and added /submit-form to the $except array. This told Laravel to skip CSRF token verification for that specific route, which allowed me to test the form successfully using Postman.
+- In the Post model, I added:
+  protected $fillable = ['title', 'content'];
+  to enable mass assignment.
+
+---
+
+### Postman Testing:
+Tested the following API endpoints:
+- GET /api/posts
+- POST /api/posts
+- GET /api/posts/{id}
+- PUT /api/posts/{id}
+- DELETE /api/posts/{id}
+
+All CRUD operations are working as expected.
