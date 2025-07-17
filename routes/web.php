@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FormController;
 
+
 Route::get('/',[PageController::class,'home']);
 Route::get('/about',[PageController::class,'about']);
 Route::get('/user/{id}',[PageController::class,'user']);

@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\FormController;
 
 Route::get('/greet', function () {
     return response()->json(['message' => 'Hello from API Route!']);
@@ -21,7 +21,8 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-use App\Http\Controllers\FormController;
+
 
 Route::post('/submit-form', [FormController::class, 'submit']);
 
+Route::apiResource('posts', PostController::class);
