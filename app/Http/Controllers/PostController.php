@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
@@ -11,14 +12,13 @@ class PostController extends Controller
         return Post::all(); // Show all posts
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required',
-        ]);
+        $validated = $request->validated();
 
-        return Post::create($validated);
+        Post::create($validated);
+
+        return response()->json(['message' => 'Post created successfully!']);
     }
 
     public function show(Post $post)
