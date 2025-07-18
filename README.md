@@ -1,41 +1,25 @@
-# Day 3 - Part 1  
-**Topic**: Model, Migration, and API Resource Controller  
+#### Date: 15 July 2025  Day 4 Part 1
 
----
+#### 📚 Topics Covered:
+-  Form Request Validation  
+-  API Resources  
+-  Pagination  
 
-### What I Did:
-- Created a new model called `Post` using:
-  php artisan make:model Post -mc
-  This created the model, migration file, and controller.
 
-- In the migration file, I added two fields: `title` (string) and `content` (text).
+###  Task Details
 
-- Ran php artisan migrate to create the `posts` table.
+#### 1. Form Request Validation
+- Created a custom request class using `php artisan make:request StoreUserRequest`.
+- Moved validation logic from the controller into the request class to improve code clarity and reuse.
 
-- In the PostController, I defined basic resource methods:
-  - index() – Get all posts
-  - store() – Create a new post (with validation)
-  - show() – Show a single post
-  - update() – Update an existing post
-  - destroy() – Delete a post
+#### 2. API Resources
+- Created resource using `php artisan make:resource UserResource`.
+- Used to structure and format JSON responses from the API.
 
-- Used Route Model Binding for cleaner controller methods.
+#### 3. Pagination
+- Applied pagination to API responses using Laravel's built-in paginate method.
 
-- Defined the route in routes/api.php using:
-  Route::apiResource('posts', PostController::class);
-
-- In the Post model, I added:
-  protected $fillable = ['title', 'content'];
-  to enable mass assignment.
-
----
-
-### Postman Testing:
-Tested the following API endpoints:
-- GET /api/posts
-- POST /api/posts
-- GET /api/posts/{id}
-- PUT /api/posts/{id}
-- DELETE /api/posts/{id}
-
-All CRUD operations are working as expected.
+### Tools Used
+- Laravel 10
+- Postman (for testing API)
+- Git & GitHub (for version control)
